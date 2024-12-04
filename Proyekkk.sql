@@ -1,81 +1,60 @@
 CREATE TABLE Pengunjung
 (
-  id_pengguna INT NOT NULL,
-<<<<<<< HEAD
+  id_pengguna SERIAL PRIMARY KEY,
   nama VARCHAR(255) NOT NULL,
   alamat VARCHAR(255) NOT NULL,  
   email VARCHAR(255) NOT NULL,   
-  no_telp VARCHAR(15) NOT NULL,  
-  PRIMARY KEY (id_pengguna)
+  no_telp VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE Pemesanan
 (
-  id_pemesanan INT NOT NULL,
-  tanggal_pemesanan DATE NOT NULL,  
-=======
-  nama INT NOT NULL,
-  alamat INT NOT NULL,
-  email INT NOT NULL,
-  no_telp INT NOT NULL,
-  PRIMARY KEY (id_pengguna)
-);
-
-
-CREATE TABLE Pemesanan
-(
-  id_pemesanan INT NOT NULL,
-  tanggal_pemesanan___ INT NOT NULL,
->>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
+  id_pemesanan SERIAL PRIMARY KEY,
+  tanggal_pemesanan DATE NOT NULL,
+  tanggal_kunjungan DATE NOT NULL,
   jumlah_tiket INT NOT NULL,
   total_tiket INT NOT NULL,
   status_pemesanan INT NOT NULL,
   id_pengguna INT NOT NULL,
-  PRIMARY KEY (id_pemesanan),
-  FOREIGN KEY (id_pengguna) REFERENCES Pengunjung(id_pengguna)
+  id_destinasi INT NOT NULL,
+  FOREIGN KEY (id_pengguna) REFERENCES Pengunjung(id_pengguna),
+  FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
 );
 
 CREATE TABLE Destinasi
 (
-  id_destinasi INT NOT NULL,
-<<<<<<< HEAD
+  id_destinasi SERIAL PRIMARY KEY,
   nama_destinasi VARCHAR(255) NOT NULL,  
   lokasi VARCHAR(255) NOT NULL,  
   deskripsi_destinasi TEXT NOT NULL,
-=======
-  nama_destinasi INT NOT NULL,
-  lokasi INT NOT NULL,
-  deskripsi_destinasi INT NOT NULL,
->>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
   harga_tiket INT NOT NULL,
-  kuota_tiket INT NOT NULL,
-  PRIMARY KEY (id_destinasi)
+  kuota_tiket INT NOT NULL
 );
 
 CREATE TABLE Admin
 (
-  id_admin INT NOT NULL,
-<<<<<<< HEAD
+  id_admin SERIAL PRIMARY KEY,  
   nama_admin VARCHAR(255) NOT NULL,  
   email_admin VARCHAR(255) NOT NULL, 
-=======
-  nama_admin INT NOT NULL,
-  email_admin INT NOT NULL,
->>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
   id_destinasi INT NOT NULL,
-  PRIMARY KEY (id_admin),
   FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
 );
 
 CREATE TABLE Laporan
 (
-  id_pengguna INT NOT NULL,
+  id_laporan SERIAL PRIMARY KEY,
+  pengunjung_id INT NOT NULL,
   id_destinasi INT NOT NULL,
-  PRIMARY KEY (id_pengguna, id_destinasi),
-  FOREIGN KEY (id_pengguna) REFERENCES Pengunjung(id_pengguna),
+  jumlah_tiket INT NOT NULL,
+  total_tiket INT NOT NULL,
+  tanggal_pemesanan DATE NOT NULL,
+  tanggal_kunjungan DATE NOT NULL,
+  FOREIGN KEY (pengunjung_id) REFERENCES Pengunjung(id_pengguna),
   FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
 );
-<<<<<<< HEAD
+
+ALTER TABLE Laporan
+ADD COLUMN nama_destinasi VARCHAR(255);
 
 -- data dummy
 INSERT INTO Pengunjung (id_pengguna, nama, alamat, email, no_telp) VALUES
@@ -129,61 +108,60 @@ INSERT INTO Pengunjung (id_pengguna, nama, alamat, email, no_telp) VALUES
 (48, 'Tari', 'Jl. Pematang Siantar No. 48', 'tari@gmail.com', '081234567937'),
 (49, 'Siska', 'Jl. Gonting No. 49', 'siska@gmail.com', '081234567938'),
 (50, 'Putra', 'Jl. Lumban Silintong No. 50', 'putra@gmail.com', '081234567939');
-SELECT * FROM pengunjung;
 
-INSERT INTO Pemesanan (id_pemesanan, tanggal_pemesanan, jumlah_tiket, total_tiket, status_pemesanan, id_pengguna) VALUES
-(1, '2024-12-01', 2, 200000, 1, 1),
-(2, '2024-12-02', 3, 300000, 2, 2),
-(3, '2024-12-03', 1, 100000, 1, 3),
-(4, '2024-12-04', 4, 400000, 3, 4),
-(5, '2024-12-05', 2, 200000, 2, 5),
-(6, '2024-12-06', 5, 500000, 1, 6),
-(7, '2024-12-07', 6, 600000, 3, 7),
-(8, '2024-12-08', 1, 100000, 2, 8),
-(9, '2024-12-09', 3, 300000, 1, 9),
-(10, '2024-12-10', 2, 200000, 2, 10),
-(11, '2024-12-11', 4, 400000, 3, 11),
-(12, '2024-12-12', 1, 100000, 1, 12),
-(13, '2024-12-13', 3, 300000, 2, 13),
-(14, '2024-12-14', 2, 200000, 1, 14),
-(15, '2024-12-15', 5, 500000, 3, 15),
-(16, '2024-12-16', 2, 200000, 1, 16),
-(17, '2024-12-17', 4, 400000, 3, 17),
-(18, '2024-12-18', 3, 300000, 2, 18),
-(19, '2024-12-19', 6, 600000, 1, 19),
-(20, '2024-12-20', 3, 300000, 2, 20),
-(21, '2024-12-21', 1, 100000, 1, 21),
-(22, '2024-12-22', 4, 400000, 3, 22),
-(23, '2024-12-23', 2, 200000, 2, 23),
-(24, '2024-12-24', 3, 300000, 1, 24),
-(25, '2024-12-25', 5, 500000, 3, 25),
-(26, '2024-12-26', 1, 100000, 2, 26),
-(27, '2024-12-27', 2, 200000, 1, 27),
-(28, '2024-12-28', 3, 300000, 2, 28),
-(29, '2024-12-29', 4, 400000, 1, 29),
-(30, '2024-12-30', 5, 500000, 3, 30),
-(31, '2024-12-31', 2, 200000, 2, 31),
-(32, '2025-01-01', 6, 600000, 1, 32),
-(33, '2025-01-02', 1, 100000, 3, 33),
-(34, '2025-01-03', 4, 400000, 2, 34),
-(35, '2025-01-04', 2, 200000, 1, 35),
-(36, '2025-01-05', 3, 300000, 3, 36),
-(37, '2025-01-06', 1, 100000, 2, 37),
-(38, '2025-01-07', 5, 500000, 3, 38),
-(39, '2025-01-08', 4, 400000, 1, 39),
-(40, '2025-01-09', 3, 300000, 2, 40),
-(41, '2025-01-10', 2, 200000, 3, 41),
-(42, '2025-01-11', 6, 600000, 1, 42),
-(43, '2025-01-12', 3, 300000, 2, 43),
-(44, '2025-01-13', 5, 500000, 3, 44),
-(45, '2025-01-14', 4, 400000, 1, 45),
-(46, '2025-01-15', 2, 200000, 2, 46),
-(47, '2025-01-16', 3, 300000, 1, 47),
-(48, '2025-01-17', 4, 400000, 3, 48),
-(49, '2025-01-18', 1, 100000, 2, 49),
-(50, '2025-01-19', 2, 200000, 1, 50);
-SELECT * FROM pemesanan;
+select  * from Pemesanan
 
+INSERT INTO Pemesanan (tanggal_pemesanan, tanggal_kunjungan, jumlah_tiket, total_tiket, status_pemesanan, id_pengguna, id_destinasi) VALUES
+('2024-12-01', '2024-12-05', 2, 200000, 1, 1, 1),
+('2024-12-02', '2024-12-06', 3, 300000, 2, 2, 2),
+('2024-12-03', '2024-12-07', 1, 100000, 1, 3, 3),
+('2024-12-04', '2024-12-08', 4, 400000, 3, 4, 4),
+('2024-12-05', '2024-12-09', 2, 200000, 2, 5, 5),
+('2024-12-06', '2024-12-10', 5, 500000, 1, 6, 6),
+('2024-12-07', '2024-12-11', 6, 600000, 3, 7, 7),
+('2024-12-08', '2024-12-12', 1, 100000, 2, 8, 8),
+('2024-12-09', '2024-12-13', 3, 300000, 1, 9, 9),
+('2024-12-10', '2024-12-14', 2, 200000, 2, 10, 10),
+('2024-12-11', '2024-12-15', 4, 400000, 3, 11, 11),
+('2024-12-12', '2024-12-16', 1, 100000, 1, 12, 12),
+('2024-12-13', '2024-12-17', 3, 300000, 2, 13, 13),
+('2024-12-14', '2024-12-18', 2, 200000, 1, 14, 14),
+('2024-12-15', '2024-12-19', 5, 500000, 3, 15, 15),
+('2024-12-16', '2024-12-20', 2, 200000, 1, 16, 16),
+('2024-12-17', '2024-12-21', 4, 400000, 3, 17, 17),
+('2024-12-18', '2024-12-22', 3, 300000, 2, 18, 18),
+('2024-12-19', '2024-12-23', 6, 600000, 1, 19, 19),
+('2024-12-20', '2024-12-24', 3, 300000, 2, 20, 20),
+('2024-12-21', '2024-12-25', 1, 100000, 1, 21, 21),
+('2024-12-22', '2024-12-26', 4, 400000, 3, 22, 22),
+('2024-12-23', '2024-12-27', 2, 200000, 2, 23, 23),
+('2024-12-24', '2024-12-28', 3, 300000, 1, 24, 24),
+('2024-12-25', '2024-12-29', 5, 500000, 3, 25, 25),
+('2024-12-26', '2024-12-30', 1, 100000, 2, 26, 26),
+('2024-12-27', '2024-12-31', 2, 200000, 1, 27, 27),
+('2024-12-28', '2025-01-01', 3, 300000, 2, 28, 28),
+('2024-12-29', '2025-01-02', 4, 400000, 1, 29, 29),
+('2024-12-30', '2025-01-03', 5, 500000, 3, 30, 30),
+('2024-12-31', '2025-01-04', 2, 200000, 2, 31, 31),
+('2025-01-01', '2025-01-05', 6, 600000, 1, 32, 32),
+('2025-01-02', '2025-01-06', 3, 300000, 2, 33, 33),
+('2025-01-03', '2025-01-07', 2, 200000, 1, 34, 34),
+('2025-01-04', '2025-01-08', 4, 400000, 3, 35, 35),
+('2025-01-05', '2025-01-09', 5, 500000, 2, 36, 36),
+('2025-01-06', '2025-01-10', 1, 100000, 1, 37, 37),
+('2025-01-07', '2025-01-11', 2, 200000, 3, 38, 38),
+('2025-01-08', '2025-01-12', 3, 300000, 1, 39, 39),
+('2025-01-09', '2025-01-13', 4, 400000, 2, 40, 40),
+('2025-01-10', '2025-01-14', 2, 200000, 3, 41, 41),
+('2025-01-11', '2025-01-15', 3, 300000, 1, 42, 42),
+('2025-01-12', '2025-01-16', 5, 500000, 2, 43, 43),
+('2025-01-13', '2025-01-17', 2, 200000, 3, 44, 44),
+('2025-01-14', '2025-01-18', 3, 300000, 1, 45, 45),
+('2025-01-15', '2025-01-19', 4, 400000, 2, 46, 46),
+('2025-01-16', '2025-01-20', 1, 100000, 1, 47, 47),
+('2025-01-17', '2025-01-21', 2, 200000, 3, 48, 48),
+('2025-01-18', '2025-01-22', 5, 500000, 2, 49, 49),
+('2025-01-19', '2025-01-23', 3, 300000, 1, 50, 50);
 
 INSERT INTO Destinasi (id_destinasi, nama_destinasi, lokasi, deskripsi_destinasi, harga_tiket, kuota_tiket) VALUES
 (1, 'Air Terjun Sipiso-piso', 'Tapanuli Utara', 'Air terjun terbesar di Sumatera Utara yang memiliki pemandangan indah.', 150000, 400),
@@ -237,41 +215,61 @@ INSERT INTO Destinasi (id_destinasi, nama_destinasi, lokasi, deskripsi_destinasi
 (49, 'Bukit Tanjung Karang', 'Tapanuli Utara', 'Bukit yang menawarkan pemandangan luar biasa ke arah Danau Toba.', 170000, 400),
 (50, 'Taman Rekreasi Sipirok', 'Tapanuli Utara', 'Taman rekreasi dengan fasilitas bermain dan pemandangan alam yang menyegarkan.', 140000, 450);
 
--- penggunaan view 
-CREATE VIEW ViewPemesanan AS
+-- penggunaan view
+CREATE VIEW view_pemesanan_destinasi AS
 SELECT 
     p.id_pemesanan,
     p.tanggal_pemesanan,
-    pg.nama AS nama_pengunjung,
+    p.tanggal_kunjungan,
     p.jumlah_tiket,
     p.total_tiket,
-    CASE 
-        WHEN p.status_pemesanan = 1 THEN 'Pending'
-        WHEN p.status_pemesanan = 2 THEN 'Confirmed'
-        WHEN p.status_pemesanan = 3 THEN 'Cancelled'
-        ELSE 'Unknown'
-    END AS status_pemesanan
-FROM Pemesanan p
-JOIN Pengunjung pg ON p.id_pengguna = pg.id_pengguna;
-SELECT * FROM ViewPemesanan;
+    p.status_pemesanan,
+    p.id_pengguna,
+    d.id_destinasi,
+    d.nama_destinasi
+FROM 
+    Pemesanan p
+JOIN 
+    Destinasi d ON p.id_destinasi = d.id_destinasi;
 
--- trigger 
--- Fungsi untuk otomatis menambahkan data ke tabel Laporan
-CREATE OR REPLACE FUNCTION insert_laporan_dengan_pemesanan()
+SELECT * FROM view_pemesanan_destinasi;
+
+-- penggunaan schema
+-- Membuat fungsi untuk trigger
+CREATE OR REPLACE FUNCTION insert_laporan_pemesanan()
 RETURNS TRIGGER AS $$
 BEGIN
-  -- Memasukkan data ke tabel Laporan berdasarkan pemesanan baru
-  INSERT INTO Laporan (pengunjung_id, destinasi_id)
-  VALUES (NEW.id_pengguna, NEW.destinasi_id);
-  RETURN NEW;
+    -- Menyimpan data pemesanan baru ke dalam tabel Laporan
+    INSERT INTO Laporan (pengunjung_id, id_destinasi, jumlah_tiket, total_tiket, tanggal_pemesanan, nama_destinasi)
+    SELECT NEW.id_pengguna, NEW.id_destinasi, NEW.jumlah_tiket, NEW.jumlah_tiket * D.harga_tiket, NEW.tanggal_pemesanan,NEW.tanggal_kunjungan,  
+           D.nama_destinasi
+    FROM Destinasi D
+    WHERE D.id_destinasi = NEW.id_destinasi;
+
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger yang akan dipicu setelah insert pada tabel Pemesanan
-CREATE TRIGGER after_insert_pemesanan
+-- Membuat trigger yang memicu fungsi di atas setelah insert ke tabel Pemesanan
+CREATE TRIGGER after_pemesanan_insert
 AFTER INSERT ON Pemesanan
 FOR EACH ROW
-EXECUTE FUNCTION insert_laporan_dengan_pemesanan();
+EXECUTE FUNCTION insert_laporan_pemesanan();
 
-=======
->>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
+--Menambah Data ke tabel Laporan 
+INSERT INTO Laporan (pengunjung_id, id_destinasi, jumlah_tiket, total_tiket, tanggal_pemesanan, tanggal_kunjungan, nama_destinasi)
+VALUES 
+  (1, 1, 2, 100000, '2024-12-01', '2024-12-05', 'Danau Toba'),
+  (2, 2, 3, 450000, '2024-12-02', '2024-12-06', 'Pantai Parbaba'),
+  (3, 3, 1, 75000, '2024-12-03', '2024-12-07', 'Desa Ambarita');
+
+-- Menambahkan pemesanan baru ke destinasi tertentu
+INSERT INTO Pemesanan (tanggal_pemesanan, tanggal_kunjungan, jumlah_tiket, total_tiket, status_pemesanan, id_pengguna, id_destinasi)
+VALUES 
+('2024-12-04', '2024-12-10', 2, 400000, 1, 1, 48),  
+('2024-12-05', '2024-12-12', 3, 600000, 0, 2, 50), 
+('2024-12-06', '2024-12-15', 5, 1000000, 1, 1, 43); 
+
+
+select * from Laporan;
+select * from Pemesanan;
