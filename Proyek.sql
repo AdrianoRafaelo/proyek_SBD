@@ -1,6 +1,7 @@
 CREATE TABLE Pengunjung
 (
   id_pengguna INT NOT NULL,
+<<<<<<< HEAD
   nama VARCHAR(255) NOT NULL,
   alamat VARCHAR(255) NOT NULL,  
   email VARCHAR(255) NOT NULL,   
@@ -12,6 +13,20 @@ CREATE TABLE Pemesanan
 (
   id_pemesanan INT NOT NULL,
   tanggal_pemesanan DATE NOT NULL,  
+=======
+  nama INT NOT NULL,
+  alamat INT NOT NULL,
+  email INT NOT NULL,
+  no_telp INT NOT NULL,
+  PRIMARY KEY (id_pengguna)
+);
+
+
+CREATE TABLE Pemesanan
+(
+  id_pemesanan INT NOT NULL,
+  tanggal_pemesanan___ INT NOT NULL,
+>>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
   jumlah_tiket INT NOT NULL,
   total_tiket INT NOT NULL,
   status_pemesanan INT NOT NULL,
@@ -23,9 +38,15 @@ CREATE TABLE Pemesanan
 CREATE TABLE Destinasi
 (
   id_destinasi INT NOT NULL,
+<<<<<<< HEAD
   nama_destinasi VARCHAR(255) NOT NULL,  
   lokasi VARCHAR(255) NOT NULL,  
   deskripsi_destinasi TEXT NOT NULL,
+=======
+  nama_destinasi INT NOT NULL,
+  lokasi INT NOT NULL,
+  deskripsi_destinasi INT NOT NULL,
+>>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
   harga_tiket INT NOT NULL,
   kuota_tiket INT NOT NULL,
   PRIMARY KEY (id_destinasi)
@@ -34,8 +55,13 @@ CREATE TABLE Destinasi
 CREATE TABLE Admin
 (
   id_admin INT NOT NULL,
+<<<<<<< HEAD
   nama_admin VARCHAR(255) NOT NULL,  
   email_admin VARCHAR(255) NOT NULL, 
+=======
+  nama_admin INT NOT NULL,
+  email_admin INT NOT NULL,
+>>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
   id_destinasi INT NOT NULL,
   PRIMARY KEY (id_admin),
   FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
@@ -49,6 +75,7 @@ CREATE TABLE Laporan
   FOREIGN KEY (id_pengguna) REFERENCES Pengunjung(id_pengguna),
   FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
 );
+<<<<<<< HEAD
 
 -- data dummy
 INSERT INTO Pengunjung (id_pengguna, nama, alamat, email, no_telp) VALUES
@@ -246,3 +273,5 @@ AFTER INSERT ON Pemesanan
 FOR EACH ROW
 EXECUTE FUNCTION insert_laporan_dengan_pemesanan();
 
+=======
+>>>>>>> cd809c36fda5a409f9b2492006d412572a922d99
