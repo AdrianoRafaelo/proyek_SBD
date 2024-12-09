@@ -239,26 +239,27 @@ $$;
 CALL pemesanan_tiket.tambah_kuota_tiket(6, 50);  
 
 SELECT * FROM pemesanan_tiket.destinasi;
+SELECT * FROM pemesanan_tiket.pemesanan;
 
 -- cursor
 DO $$
 DECLARE
     kuota_ready_cursor CURSOR FOR
-    SELECT id_tiket, nama_destinasi, kuota_tiket
-    FROM Tiket
-    WHERE kuota_tiket > 0;
+        SELECT id_destinasi, nama_destinasi, kuota_tiket
+        FROM pemesanan_tiket.destinasi
+        WHERE kuota_tiket > 0;
 
-    tiket_row RECORD;
+    -- Declare the RECORD variable without schema prefix
+    destinasi_record RECORD;
 BEGIN
     OPEN kuota_ready_cursor;
     LOOP
-        FETCH NEXT FROM kuota_ready_cursor INTO tiket_row;
+        FETCH NEXT FROM kuota_ready_cursor INTO destinasi_record;
         EXIT WHEN NOT FOUND;
 
         -- Cetak informasi tiket
         RAISE NOTICE 'ID: %, Destinasi: %, Kuota: %',
-            tiket_row.id_tiket, tiket_row.nama_destinasi, tiket_row.kuota_tiket;
+            destinasi_record.id_destinasi, destinasi_record.nama_destinasi, destinasi_record.kuota_tiket;
     END LOOP;
     CLOSE kuota_ready_cursor;
 END $$;
-
