@@ -78,6 +78,7 @@ SELECT
     d.nama_destinasi,
     d.lokasi,
     COUNT(p.id_pemesanan) AS total_pemesanan,
+    SUM(p.total_tiket) AS total_pendapatan, -- Menghitung total pendapatan
     EXTRACT(MONTH FROM p.tanggal_pemesanan) AS bulan_pemesanan,
     EXTRACT(YEAR FROM p.tanggal_pemesanan) AS tahun_pemesanan
 FROM 
@@ -87,9 +88,10 @@ JOIN
 GROUP BY 
     d.id_destinasi, d.nama_destinasi, d.lokasi, EXTRACT(MONTH FROM p.tanggal_pemesanan), EXTRACT(YEAR FROM p.tanggal_pemesanan)
 ORDER BY 
-    total_pemesanan DESC;  
+    total_pendapatan DESC;
 
 SELECT * FROM pemesanan_tiket.view_pendapatan_per_destinasi;
+
 
 -- penggunaan trigger
 -- Trigger for inserting laporan_pemesanan
