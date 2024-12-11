@@ -50,6 +50,7 @@ CREATE TABLE pemesanan_tiket.Laporan_Destinasi (
   FOREIGN KEY (id_destinasi) REFERENCES Destinasi(id_destinasi)
 );
 
+
 -- data dummy 
 INSERT INTO pemesanan_tiket.Pengunjung (id_pengguna, nama, alamat, email, no_telp) VALUES
 (1, 'Anastasya', 'Jl. Aekristop No. 1', 'putri@gmail.com', '081234567890'),
@@ -249,7 +250,6 @@ DECLARE
         FROM pemesanan_tiket.destinasi
         WHERE kuota_tiket > 0;
 
-    -- Declare the RECORD variable without schema prefix
     destinasi_record RECORD;
 BEGIN
     OPEN kuota_ready_cursor;
